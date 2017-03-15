@@ -14,6 +14,20 @@ list = {
 	}
 }
 
+
+COMMUNIST GOALS
+"
+1. Abolition of property in land and application of all rents of land to public purposes. 
+2. A heavy progressive or graduated income tax. 
+3. Abolition of all rights of inheritance. 
+4. Confiscation of the property of all emigrants and rebels. 
+5. Centralisation of credit in the hands of the state, by means of a national bank with State capital and an exclusive monopoly. 
+6. Centralisation of the means of communication and transport in the hands of the State. 
+7. Extension of factories and instruments of production owned by the State; the bringing into cultivation of waste-lands, and the improvement of the soil generally in accordance with a common plan. 
+8. Equal liability of all to work. Establishment of industrial armies, especially for agriculture. 
+9. Combination of agriculture with manufacturing industries; gradual abolition of all the distinction between town and country by a more equable distribution of the populace over the country. 
+10. Free education for all children in public schools. Abolition of children’s factory labour in its present form. Combination of education with industrial production, &c, &c.
+"(communist manifesto, chapter 2, bottom of page)
 ]]--
 math.randomseed(os.time())
 tax = 15
@@ -21,6 +35,8 @@ socialSpending = 250
 population = math.random(900,1100)
 money = math.random(900,1100)
 happiness = 100
+dead = false
+weeksInPower = 0
 --currentEconomy = "capitalism"
 
 advisorList = require("advisors")
@@ -110,7 +126,7 @@ function displayStats(recentEvent) --just a stat display, the only input isnt ev
 	if recentEvent ~= nil then --if there was a recent event . . .
 		print("Headlines: "..recentEvent) -- . . . display it as a news headline
 	end
-	print("The population is "..getHappiness(happiness,happyList)) --happiness display, very vague
+	print("The population "..getHappiness(happiness,happyList)) --happiness display, very vague
 end
 
 function resetTurnOptions() --reseting option list
@@ -200,6 +216,17 @@ function effectTurn()
 	elseif socialSpending >= 1000 then  
 		happiness = happiness + 20
 	end
+	
+	if happiness < 25 then
+		if math.random(1,20) < 15 then
+			if math.random(1,20) <10 then
+				print("Someone attempted to kill you!")
+			end
+		else
+			print("You have been killed, you ruled for "..weeksInPower.." weeks")
+			dead = true
+		end
+	end
 
 	if tax < 5 then
 		happiness = happiness + 10
@@ -210,7 +237,7 @@ function effectTurn()
 	elseif tax < 20 and tax >= 50 then
 		happiness = happiness-10
 	elseif tax >= 50 then
-		happiness = happiness-25
+		happiness = happiness-40
 	end
 
 	if happiness > 100 then
@@ -224,8 +251,9 @@ end
 -- temp for testing
 currentEconomy = pickEconomy()
 print(currentEconomy)
-while true do
+while dead == false do
 	turn()
 	effectTurn()
+	weeksInPower = weeksInPower+1
 end
 -- end of temp
