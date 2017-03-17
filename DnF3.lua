@@ -21,3 +21,29 @@ socialSpending = 250
 population = 1000
 money = 1000
 currentEconomy = "capitalism"
+
+function inList(list,val)
+	for k,v in pairs(list) do
+		if v == val then
+			return true
+		end
+	end
+	return false
+end
+
+function pickOption(list,question)
+	local input = ""
+	while inList(list,input) == false do
+		for k,v in pairs(list) do
+			print(k..":"..v)
+		end
+		print("")
+		io.write(question)
+		input = io.read()
+	end
+	return input
+end
+
+function pickEconomy(currentEconomy)
+
+end
