@@ -52,8 +52,8 @@ function pickOption(list,question)
 		io.write(question)
 		input = io.read()
 	end
-	local k,v = inList(list,input)
-	return input,k
+	local k,v,key = inList(list,input)
+	return input,k,key
 end
 
 function pickEconomy()
