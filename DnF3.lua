@@ -26,14 +26,19 @@ economyList = {
 	"communism",
 	"capitalism",
 	"nazism",
+	"marxism"
 
 
 }
 
 function inList(list,val)
+	val = tostring(val)
 	for k,v in pairs(list) do
-		if v == val then
-			return k,v
+		if v == val or tostring(k) == val then
+			if tostring(k) == val then
+				return k,v,true
+			end
+			return k,v,false
 		end
 	end
 	return false
@@ -55,9 +60,12 @@ end
 
 function pickEconomy(currentEconomy)
 	k,v = pickOption(economyList,"What economy will you found?\n")
-	if inList(economyList,v) == false then
+	l,b,key = inList(economyList,v)
+	if key == true then
 		return economyList[k]
 	else
 		return v
 	end
 end
+
+currentEconomy = pickEconomy(currentEconomy)
