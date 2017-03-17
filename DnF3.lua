@@ -9,6 +9,7 @@ list = {
 		otherDictatorLoyaltyModifier=5,
 		moneyAddedPerTurn=5,
 		taxModifier=0,
+		greedModifier=100, --means, that 300 is happiest, 200 is stable, and 100 is going down, and 100 or less is REALLY BAD
 		socialSpendingModifier=0
 	}
 }
