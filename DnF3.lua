@@ -20,3 +20,4 @@ tax = 15
 socialSpending = 250
 population = 1000
 money = 1000
+currentEconomy = "capitalism"
