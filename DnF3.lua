@@ -22,10 +22,18 @@ population = 1000
 money = 1000
 currentEconomy = "capitalism"
 
+economyList = {
+	"communism",
+	"capitalism",
+	"nazism",
+
+
+}
+
 function inList(list,val)
 	for k,v in pairs(list) do
 		if v == val then
-			return true
+			return k,v
 		end
 	end
 	return false
@@ -41,9 +49,15 @@ function pickOption(list,question)
 		io.write(question)
 		input = io.read()
 	end
-	return input
+	k,v = inList(list,input)
+	return input,k
 end
 
 function pickEconomy(currentEconomy)
-
+	k,v = pickOption(economyList,"What economy will you found?\n")
+	if inList(economyList,v) == false then
+		return economyList[k]
+	else
+		return v
+	end
 end
