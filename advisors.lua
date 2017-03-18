@@ -29,4 +29,64 @@ return {
 		"greedModifier" = 100,
 		"socialSpendingModifier" = 0
 	}
+	2 = {
+		"name" = "Stalin",
+		"happinessModifier" = 6,
+		"otherDictatorLoyaltyModifier" = 1,
+		"loyaltyModifier" = 1,
+		"moneyAddedPerTurn" = 40,
+		"taxModifier" = 0,
+		"greedModifier" = 90,
+		"socialSpendingModifier" = 3
+	}
+	3 = {
+		"name" = "Fidel Castro",
+		"happinessModifier" = 7,
+		"otherDictatorLoyaltyModifier" = 2,
+		"loyaltyModifier" = 3,
+		"moneyAddedPerTurn" = 50,
+		"taxModifier" = 0,
+		"greedModifier" = 30,
+		"socialSpendingModifier" = 6
+	}
+	4 = {
+		"name" = "Kim Jong Un",
+		"happinessModifier" = -5,
+		"otherDictatorLoyaltyModifier" = -3,
+		"loyaltyModifier" = 3,
+		"moneyAddedPerTurn" = 300,
+		"taxModifier" = 3,
+		"greedModifier" = 100,
+		"socialSpendingModifier" = 0
+	}
+	5 = {
+		"name" = "Mussolini",
+		"happinessModifier" = 9,
+		"otherDictatorLoyaltyModifier" = 3,
+		"loyaltyModifier" = 3,
+		"moneyAddedPerTurn" = 170,
+		"taxModifier" =1,
+		"greedModifier" = 10,
+		"socialSpendingModifier" = 2
+	}
+	6 = {
+		"name" = "Putin",
+		"happinessModifier" = 7,
+		"otherDictatorLoyaltyModifier" = 3,
+		"loyaltyModifier" = 2,
+		"moneyAddedPerTurn" = 150,
+		"taxModifier" = 2,
+		"greedModifier" = 60,
+		"socialSpendingModifier" = 3
+	}
+	7 = {
+		"name" = "Nigerian Prince",
+		"happinessModifier" = -4,
+		"otherDictatorLoyaltyModifier" = -1,
+		"loyaltyModifier" = 3,
+		"moneyAddedPerTurn" = 500,
+		"taxModifier" = 3,
+		"greedModifier" = 100,
+		"socialSpendingModifier" = -3
+	}		
 }
