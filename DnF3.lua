@@ -154,6 +154,12 @@ function turn()
 				input = io.read("*line")
 			until type(tonumber(input)) == "number"
 			tax = tonumber(input)
+			if tax > 100 then
+				tax = 100
+			end
+			if tax < 0 then
+				tax = 0
+			end
 			time = time-1
 		elseif v == "Change Social Spending" then
 			local input = 1
@@ -188,6 +194,18 @@ function effectTurn()
 		happiness = happiness + 10
 	elseif socialSpending >= 1000 then  
 		happiness = happiness + 20
+	end
+
+	if tax < 5 then
+		happiness = happiness + 10
+	elseif tax < 10 and tax >= 15 then
+		happiness = happiness + 5
+	elseif tax < 15 and tax >= 20 then
+		happiness = happiness-5
+	elseif tax < 20 and tax >= 50 then
+		happiness = happiness-10
+	elseif tax >= 50 then
+		happiness = happiness-25
 	end
 
 	if happiness > 100 then
