@@ -97,7 +97,7 @@ function getHappiness(happiness,happyList) --takes in the happy percentage and t
 			return happyList[i] -- . . . return the string from the original list
 		end
 	end
-	return "ERROR: Happiness is out of range" --if a value is never found then return an error
+	return "ERROR: Happiness is out of range: "..happiness --if a value is never found then return an error
 end
 
 function displayStats(recentEvent) --just a stat display, the only input isnt even needed and is just a re-display of the most recent event
@@ -141,7 +141,7 @@ function turnOptions(recentEvent,time,optionList) --no input required, though it
 	end
 end
 
-function turn()
+function turn(recentEvent)
 	local time = 3
 	local actionTemp = ""
 	local optionList = resetTurnOptions() --resetting option list
@@ -181,7 +181,7 @@ end
 function effectTurn()
 	population = population + math.floor((population/100))
 	money = money+math.floor((population * (tax/100)))
-	happiness = math.random(1,10)-5
+	happiness = happiness + math.random(1,10)-5
 	if socialSpending < 100 then
 		happiness = happiness - 10
 	elseif socialSpending >= 100 and socialSpending < 250 then
@@ -210,8 +210,8 @@ function effectTurn()
 
 	if happiness > 100 then
 		happiness = 100
-	elseif happiness < 0 then
-		happiness = 0
+	elseif happiness < 1 then
+		happiness = 1
 	end
 end
 
@@ -219,5 +219,8 @@ end
 -- temp for testing
 currentEconomy = pickEconomy()
 print(currentEconomy)
-turn()
+while true do
+	turn()
+	effectTurn()
+end
 -- end of temp
