@@ -20,6 +20,7 @@ tax = 15
 socialSpending = 250
 population = 1000
 money = 1000
+happiness = 100
 --currentEconomy = "capitalism"
 
 economyList = {
@@ -29,14 +30,28 @@ economyList = {
 	"marxism"
 }
 
+happyList = {
+	"is rioting",
+	"would rather die",
+	"finds you revolting",
+	"hates you",
+	"is unhappy",
+	"tolerates you",
+	"is generally happy with you",
+	"is happy with you",
+	"highly approves of you",
+	"looks up to you",
+	"loves you"
+}
+
 function inList(list,val)
 	local val = tostring(val)
 	for k,v in pairs(list) do
 		if v == val or tostring(k) == val then
 			if tostring(k) == val then
-				return k,v,true
+				return tonumber(k),v,true
 			end
-			return k,v,false
+			return tonumber(k),v,false
 		end
 	end
 	return false
@@ -66,4 +81,49 @@ function pickEconomy()
 	end
 end
 
+function getHappiness(happiness,happyList)
+	local length = #happyList
+	for i = 1,length do
+		if happiness < i*(100/length) and happiness > (i*(100/length))-100/length then
+			return happyList[i]
+		end
+	end
+end
+
+function displayStats(recentEvent)
+	print("Tax : "..tax)
+	print("Social Spending: "..socialSpending)
+	print("Money: "..money)
+	print("Population: "..population)
+	if recentEvent ~= nil then
+		print("Headlines: "..recentEvent)
+	end
+	print("The population is "..getHappiness(happiness,happyList))
+end
+
+function resetTurnOptions()
+	local optionList = {
+		"Change Taxes",
+		"Change Social Spending",
+		"Change Advisor Paycheck",
+		"Fire Advisor"
+	}
+	if currentEconomy == "nazism" then
+		optionList[5] = "Change Genocide Options"
+	end
+	return optionList
+end
+
+function turnOptions(recentEvent)
+	local time = 100
+	local optionList = resetTurnOptions()
+	while time > 0 do
+		displayStats(recentEvent)
+		local v,k,key = pickOption(optionList,"Next Action: ")
+		optionList[k] = nil
+	end
+end
+
 currentEconomy = pickEconomy()
+print(currentEconomy)
+turnOptions()
