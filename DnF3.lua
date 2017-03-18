@@ -75,7 +75,7 @@ function pickEconomy()
 	local k,v = pickOption(economyList,"What economy will you found?\n")
 	local l,b,key = inList(economyList,v)
 	if key == true then
-		return economyList[k]
+		return economyList[tonumber(k)]
 	else
 		return v
 	end
