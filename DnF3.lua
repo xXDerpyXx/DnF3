@@ -101,7 +101,7 @@ function getHappiness(happiness,happyList) --takes in the happy percentage and t
 end
 
 function displayStats(recentEvent) --just a stat display, the only input isnt even needed and is just a re-display of the most recent event
-	print("Tax : "..tax) --tax display, direct
+	print("Tax: "..tax.."%") --tax display, direct
 	print("Social Spending: "..socialSpending) --social spending display, direct
 	print("Money: "..money) --money display, direct
 	print("Population: "..population) --population display, vague (unknown proportions of ethnicities)
@@ -124,19 +124,52 @@ function resetTurnOptions() --reseting option list
 	return optionList --return the finished list
 end
 
-function turnOptions(recentEvent) --no input required, though it will use a recent event if there is one present
-	local time = 100 --total time per turn, when its out, turn ends
-	local optionList = resetTurnOptions() --resetting option list
+function turnOptions(recentEvent,time,optionList) --no input required, though it will use a recent event if there is one present
+	--local time = 100 --total time per turn, when its out, turn ends
+	
 	while time > 0 do --until time is up . . .
 		displayStats(recentEvent) -- . . . display stats . . .
 		local v,k,key = pickOption(optionList,"Next Action: ") -- . . . ask for next action . . .
+		if key then
+			v = optionList[k]
+		end
 		optionList[k] = nil -- . . . then remove the action from the list
+		return v,list
 	end
 end
+
+function turn()
+	local time = 3
+	local actionTemp = ""
+	local optionList = resetTurnOptions() --resetting option list
+	while time > 0 do
+		local v,optionList = turnOptions(recentEvent,time,optionList)
+		if v == "Change Taxes" then
+			local input = 1
+			repeat
+				io.write("New Tax: ")
+				input = io.read("*line")
+			until type(tonumber(input)) == "number"
+			tax = tonumber(input)
+			time = time-1
+		elseif v == "Change Social Spending" then
+			local input = 1
+			repeat
+				io.write("New Budget: ")
+				input = io.read("*line")
+			until type(tonumber(input)) == "number"
+			socialSpending = tonumber(input)
+			time = time-1
+		end
+		print("")
+		print(time.." days left")
+		print("")
+	end
+end
+
 
 -- temp for testing
 currentEconomy = pickEconomy()
 print(currentEconomy)
-turnOptions()
+turn()
 -- end of temp
-
