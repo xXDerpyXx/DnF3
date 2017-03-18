@@ -44,6 +44,15 @@ happyList = {
 	"loves you"
 }
 
+ethnicities = {
+	"Jews",
+	"Arabs",
+	"Europeans",
+	"Asians",
+	"African",
+	"Hispanic"
+}
+
 function inList(list,val)
 	local val = tostring(val)
 	for k,v in pairs(list) do
