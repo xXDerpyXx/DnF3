@@ -15,11 +15,11 @@ list = {
 }
 
 ]]--
-
+math.randomseed(os.time())
 tax = 15
 socialSpending = 250
-population = 1000
-money = 1000
+population = math.random(900,1100)
+money = math.random(900,1100)
 happiness = 100
 --currentEconomy = "capitalism"
 
