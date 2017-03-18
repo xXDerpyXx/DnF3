@@ -116,10 +116,11 @@ function resetTurnOptions() --reseting option list
 		"Change Taxes",
 		"Change Social Spending",
 		"Change Advisor Paycheck",
-		"Fire Advisor"
+		"Fire Advisor",
+		"Wait"
 	}
 	if currentEconomy == "nazism" then --if nazism then . . .
-		optionList[5] = "Change Genocide Options" -- . . . allow genocide
+		optionList[6] = "Change Genocide Options" -- . . . allow genocide
 	end
 	return optionList --return the finished list
 end
@@ -133,7 +134,9 @@ function turnOptions(recentEvent,time,optionList) --no input required, though it
 		if key then
 			v = optionList[k]
 		end
-		optionList[k] = nil -- . . . then remove the action from the list
+		if v ~= "Wait" then
+			optionList[k] = nil -- . . . then remove the action from the list
+		end
 		return v,list
 	end
 end
@@ -160,10 +163,37 @@ function turn()
 			until type(tonumber(input)) == "number"
 			socialSpending = tonumber(input)
 			time = time-1
+		elseif v == "Wait" then
+			time = time-1
 		end
 		print("")
 		print(time.." days left")
 		print("")
+	end
+end
+
+function effectTurn()
+	population = population + math.floor((population/100))
+	money = money+math.floor((population * (tax/100)))
+	happiness = math.random(1,10)-5
+	if socialSpending < 100 then
+		happiness = happiness - 10
+	elseif socialSpending >= 100 and socialSpending < 250 then
+		happiness = happiness - 5
+	elseif socialSpending >= 250 and socialSpending < 350 then
+
+	elseif socialSpending >= 350 and socialSpending < 500 then 
+		happiness = happiness + 5
+	elseif socialSpending >= 500 and socialSpending < 1000 then
+		happiness = happiness + 10
+	elseif socialSpending >= 1000 then  
+		happiness = happiness + 20
+	end
+
+	if happiness > 100 then
+		happiness = 100
+	elseif happiness < 0 then
+		happiness = 0
 	end
 end
 
