@@ -23,6 +23,8 @@ money = math.random(900,1100)
 happiness = 100
 --currentEconomy = "capitalism"
 
+advisorList = require("advisors")
+
 economyList = {
 	"communism",
 	"capitalism",
@@ -122,6 +124,9 @@ function resetTurnOptions() --reseting option list
 	if currentEconomy == "nazism" then --if nazism then . . .
 		optionList[6] = "Change Genocide Options" -- . . . allow genocide
 	end
+	if happiness < 50 then
+		optionList[5] = "Cry in the corner"
+	end
 	return optionList --return the finished list
 end
 
@@ -134,7 +139,7 @@ function turnOptions(recentEvent,time,optionList) --no input required, though it
 		if key then
 			v = optionList[k]
 		end
-		if v ~= "Wait" then
+		if v ~= "Wait" and v ~= "Cry in the corner" then
 			optionList[k] = nil -- . . . then remove the action from the list
 		end
 		return v,list
@@ -169,7 +174,7 @@ function turn(recentEvent)
 			until type(tonumber(input)) == "number"
 			socialSpending = tonumber(input)
 			time = time-1
-		elseif v == "Wait" then
+		elseif v == "Wait" or v == "Cry in the corner" then
 			time = time-1
 		end
 		print("")
